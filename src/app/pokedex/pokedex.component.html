@@ -6,5 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div *ngFor="let pokemon of pokemons">
+      <h4>{{ pokemon.name }}</h4>
+      <p>{{ pokemon.id }}</p>
+      <ul *ngFor="let type of types">
+        <li>{{ type.name }}</li>
+      </ul>
+    </div>
+  </body>
 </html>

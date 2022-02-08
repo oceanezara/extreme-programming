@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
+  pokemons: string[] = [];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -15,12 +17,14 @@ export class PokedexComponent implements OnInit {
         allpokemon.results.forEach(function (pokemon: any) {
           fetchPokemonData(pokemon);
         });
+        console.log(allpokemon);
       });
-    renderPokemon();
+    //renderPokemon();
   }
 }
+
 function fetchPokemonData(pokemon: any) {
-  let url = pokemon.url; // <--- this is saving the pokemon url to a      variable to us in a fetch.(Ex: https://pokeapi.co/api/v2/pokemon/1/)
+  let url = pokemon.url; // <--- this is saving the pokemon url to a      variable to us in a fetch.(Ex: https://pokeapi.//co/api/v2/pokemon/1/)
   fetch(url)
     .then((response) => response.json())
     .then(function (pokeData) {
