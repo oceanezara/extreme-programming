@@ -9,10 +9,7 @@
   <body>
     <div *ngFor="let pokemon of pokemons">
       <h4>{{ pokemon.name }}</h4>
-       <p>{{ pokemon.url }}</p>
-<!--      <ul *ngFor="let type of types">
-        <li>{{ type.name }}</li>
-      </ul> -->
+      <app-pokemon-item></app-pokemon-item>
     </div>
   </body>
 </html>
