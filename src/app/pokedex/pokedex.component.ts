@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pokedex.component.html',
   styleUrls: ['./pokedex.component.scss'],
 })
-
 export class PokedexComponent implements OnInit {
   pokemons: any[] = [];
 
@@ -13,33 +12,33 @@ export class PokedexComponent implements OnInit {
     this.fetchAllPokemons();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   fetchAllPokemons() {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then((response) => response.json())
-    .then((allpokemon) => {
-      allpokemon.results.forEach( (pokemon: any) => {
-        this.pokemons = allpokemon.results;
-/*         fetchPokemonData(pokemon);
- */       });
-      console.log(allpokemon.results);
-    });
+      .then((response) => response.json())
+      .then((allpokemon) => {
+        allpokemon.results.forEach((pokemon: any) => {
+          this.pokemons = allpokemon.results;
+          this.fetchPokemonData();
+        });
+        console.log(allpokemon.results);
+      });
+  }
+
+  fetchPokemonData() {
+    console.log(pokemon.url);
+    const url = this.pokemons;
+    // <--- this is saving the pokemon url to a variable to us in a fetch.(Ex: https://pokeapi.//co/api/v2/pokemon/1/)
+    fetch(url)
+      .then((response) => response.json())
+      .then(function (pokeData) {
+        console.log(pokeData.id);
+        //renderPokemon(pokeData);
+        //createPokeImage(pokeData.id, pokeContainer);
+      });
   }
 }
-
-/*
-fetchPokemonData(pokemon: any) {
-  let url = pokemon.url; // <--- this is saving the pokemon url to a variable to us in a fetch.(Ex: https://pokeapi.//co/api/v2/pokemon/1/)
-  fetch(url)
-    .then((response) => response.json())
-    .then(function (pokeData) {
-      console.log(pokeData.id);
-      renderPokemon(pokeData);
-      //createPokeImage(pokeData.id, pokeContainer);
-    });
-} */
 
 /*
 renderPokemon(pokeData: { name: string; id: any; types: any }) {
