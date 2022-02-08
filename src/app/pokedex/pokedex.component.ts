@@ -16,7 +16,6 @@ export class PokedexComponent implements OnInit {
           fetchPokemonData(pokemon);
         });
       });
-    renderPokemon();
   }
 }
 function fetchPokemonData(pokemon: any) {
@@ -24,7 +23,9 @@ function fetchPokemonData(pokemon: any) {
   fetch(url)
     .then((response) => response.json())
     .then(function (pokeData) {
-      console.log(pokeData);
+      console.log(pokeData.id);
+      renderPokemon(pokeData);
+      createPokeImage(pokeData.id, pokeContainer);
     });
 }
 
@@ -51,4 +52,10 @@ function createTypes(types: any[], ul: HTMLUListElement) {
     typeLi.innerText = type['type']['name'];
     ul.append(typeLi);
   });
+}
+
+function createPokeImage(pokeID: number, containerDiv: { append: (arg0: HTMLImageElement) => void; }){
+  let pokeImage = document.createElement('img')
+  pokeImage.srcset =    `https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`
+  containerDiv.append(pokeImage);
 }
