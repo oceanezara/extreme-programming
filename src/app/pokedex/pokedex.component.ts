@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { catchError, delay, of } from 'rxjs';
 
 @Component({
   selector: 'app-pokedex',
@@ -7,21 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexComponent implements OnInit {
   pokemons: any[] = [];
+  isLoading = true;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.fetchAllPokemons();
   }
 
   ngOnInit(): void {}
 
   fetchAllPokemons() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-      .then((response) => response.json())
-      .then((allpokemon) => {
+    this.httpClient
+      .get('https://pokeapi.co/api/v2/pokemon?limit=151')
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return of([]);
+        }),
+      )
+      .pipe(delay(1000))
+      .subscribe((allpokemon: any) => {
         allpokemon.results.forEach((pokemon: any) => {
+          this.isLoading = false;
           this.pokemons = allpokemon.results;
         });
       });
   }
-
 }

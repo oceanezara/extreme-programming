@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { catchError, delay, of } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -8,22 +10,28 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PokemonItemComponent implements OnInit {
   @Input() pokemonInfo: any | undefined;
   pokeData: any;
+  isLoading = true;
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     console.log(this.pokemonInfo.url);
     this.fetchPokemonData(this.pokemonInfo.url);
   }
 
-  fetchPokemonData(url: RequestInfo) {
-    fetch(url)
-      .then((response) => response.json())
-      .then((pokeData) => {
+  fetchPokemonData(url: string) {
+    this.httpClient
+      .get(url)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return of([]);
+        }),
+      )
+      .pipe(delay(1000))
+      .subscribe((pokeData: any) => {
+        this.isLoading = false;
         this.pokeData = pokeData;
-        //console.log(pokeData);
-        //this.pokemonId = pokeData.id;
-        //console.log(this.pokemonId);
       });
   }
 }
