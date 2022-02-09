@@ -1,4 +1,4 @@
-<p>pokemon.id</p>
+<p># {{ pokeData?.id }}</p>
     <ul>
-        <li>type.name</li>
+        <li *ngFor="let type of pokeData?.types">{{ type.type.name }}</li>
     </ul>
