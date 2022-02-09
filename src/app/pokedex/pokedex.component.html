@@ -7,8 +7,8 @@
     <title>Document</title>
   </head>
   <body>
-    <div *ngFor="let pokemon of pokemons">
-      <h4>{{ pokemon.name }}</h4>
+    <div *ngFor="let pokemon of pokemons" class="card" style="width: 18rem">
+      <h4 class="card-title">{{ pokemon.name }}</h4>
       <app-pokemon-item [pokemonInfo]="pokemon"></app-pokemon-item>
     </div>
   </body>

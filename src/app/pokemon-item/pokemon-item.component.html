@@ -1,4 +1,14 @@
 <p># {{ pokeData?.id }}</p>
-    <ul>
-        <li *ngFor="let type of pokeData?.types">{{ type.type.name }}</li>
-    </ul>
+
+<img
+  src="{{ pokeData?.sprites.front_default }}"
+  class="card-img-top"
+  alt="..."
+/>
+<div class="card-body">
+  <ul class="card-text">
+    <li *ngFor="let type of pokeData?.types">{{ type.type.name }}</li>
+  </ul>
+
+  <a href="#" class="btn btn-primary">Fiche détaillée</a>
+</div>
