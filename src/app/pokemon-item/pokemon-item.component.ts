@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonItemComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    console.log()
+    //this.fetchPokemonData(pokemon.url);
+   }
 
   ngOnInit(): void {
   }
-
+/*
   fetchPokemonData(url: RequestInfo) {
     fetch(url)
       .then((response) => response.json())
@@ -20,5 +23,5 @@ export class PokemonItemComponent implements OnInit {
         console.log(this.pokemonId);
         //console.log(pokeData);
       });
-  }
+  } */
 }

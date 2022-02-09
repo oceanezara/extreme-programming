@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexComponent implements OnInit {
   pokemons: any[] = [];
-  pokemonId!: number;
 
   constructor() {
     this.fetchAllPokemons();
@@ -21,7 +20,6 @@ export class PokedexComponent implements OnInit {
       .then((allpokemon) => {
         allpokemon.results.forEach((pokemon: any) => {
           this.pokemons = allpokemon.results;
-          this.fetchPokemonData(pokemon.url);
         });
       });
   }
